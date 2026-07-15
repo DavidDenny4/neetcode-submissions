@@ -1,0 +1,25 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        
+        def dfs(amount):
+            
+            if amount == 0:
+                return 0
+            
+            if amount < 0:
+                return -1
+            
+            lowest = float('inf')
+            for coin in coins:
+                result = dfs(amount - coin)
+                if result != -1:
+                    lowest = min(lowest, 1 + result)
+
+            return lowest
+        
+        return dfs(amount) 
+
+        
+
+                
+
