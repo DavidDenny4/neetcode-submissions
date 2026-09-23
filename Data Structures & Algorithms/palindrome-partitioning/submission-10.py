@@ -1,0 +1,36 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        
+        def is_palindrome(word):
+
+            L, R = 0, len(word) - 1
+            while L < R:
+                if word[L] != word[R]:
+                    return False
+
+                L += 1
+                R -= 1
+            return True
+
+        res = []
+        curr_stack = []
+
+        def dfs(index):
+
+
+            if index >= len(s):
+                res.append(curr_stack.copy())
+                return
+            
+            for i in range(index + 1, len(s) + 1):
+                if is_palindrome(s[index:i]):
+                    curr_stack.append(s[index:i])
+                    dfs(i)
+                    curr_stack.pop()
+            
+        dfs(0)
+        return res
+            
+                
+
+
